@@ -31,7 +31,38 @@ namespace KthToLast
 		/// </exception>
 		public static T KthToLastSinglyLinked<T>(this LinkedList<T> linkedList, int k)
 		{
-			return default;
+
+			if (linkedList.Count() == 0)
+			{
+				throw new IndexOutOfRangeException();
+			}
+			
+
+			if (k == 0)
+			{
+				return linkedList.Last();
+			}
+
+			if (k >= linkedList.Count() || k < 0 || linkedList.Count() == 0)
+			{
+				throw new IndexOutOfRangeException();
+			}
+
+			if (k == linkedList.Count())
+			{
+				return linkedList.First();
+			}
+
+			LinkedListNode<T> currentNode = linkedList.First;
+
+			for (int i = 0; i < linkedList.Count() - k - 1; i++)
+			{
+				currentNode = currentNode.Next;
+			}
+
+
+
+			return currentNode.Value;
 		}
 
         /// <summary>
@@ -62,7 +93,33 @@ namespace KthToLast
         /// </exception>
         public static T KthToLastDoublyLinked<T>(this LinkedList<T> linkedList, int k)
         {
-			return default;
+			if (linkedList.Count() == 0)
+			{
+				throw new IndexOutOfRangeException();
+			}
+
+			if (k == 0)
+			{
+				return linkedList.Last();
+			}
+
+			if (k >= linkedList.Count() || k < 0)
+			{
+				throw new IndexOutOfRangeException();
+			}
+
+			if (k == linkedList.Count())
+			{
+				return linkedList.First();
+			}
+
+			LinkedListNode<T> currentNode = linkedList.First;
+
+			for (int i = 0; i < linkedList.Count() - k - 1; i++)
+			{
+				currentNode = currentNode.Next;
+			}
+			return currentNode.Value;
         }
     }
 }

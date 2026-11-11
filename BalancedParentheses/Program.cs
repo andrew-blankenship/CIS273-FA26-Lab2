@@ -26,8 +26,128 @@ public class Program
     /// <returns>true if the parentheses in <paramref name="s"/> are balanced; otherwise, false.</returns>
     public static bool IsBalanced(string s)
     {
+        Stack<char> bal = new Stack<char>();
+        // int a = 0;
+        // int b = 0;
+        // int c = 0;
+        // int d = 0;
+        foreach (char thing in s)
+        {
+            List<char> paren = new List<char>();
+            paren = ['(', ')', '[', ']', '{', '}', '<', '>'];
+            if (paren.Contains(thing) == false)
+            {
+                continue;
+            }
+
+            if (thing == '(' || thing == '[' || thing == '{' || thing == '<')
+            {
+                bal.Push(thing);
+            }
+
+            if (bal.Count == 0)
+            {
+                return false;
+            }
+
+            if (thing == ')')
+            {
+                char test = bal.Pop();
+                if (test != '(')
+                {
+                    return false;
+                }
+            }
+
+            if (thing == ']')
+            {
+                char test = bal.Pop();
+                if (test != '[')
+                {
+                    return false;
+                }
+            }
+
+            if (thing == '}')
+            {
+                char test = bal.Pop();
+                if (test != '{')
+                {
+                    return false;
+                }
+            }
+
+            if (thing == '>')
+            {
+                char test = bal.Pop();
+                if (test != '<')
+                {
+                    return false;
+                }
+            }
+
         
-        return false;
+        }
+
+        if (bal.Count != 0)
+        {
+            return false;
+        }
+        
+
+        // foreach (char thing in s)
+        // {
+        //     // if (b>0 && (b>0 || c>0 || d>0) && thing == '}')
+        //     // {
+        //     //     return false;
+        //     // } 
+
+        //     if (thing == '(')
+        //     {
+        //         a ++;
+        //     }
+        //     if (thing == '{')
+        //     {
+        //         b ++;
+        //     }
+        //     if (thing == '[')
+        //     {
+        //         c ++;
+        //     }
+        //     if (thing == '<')
+        //     {
+        //         d++;
+        //     }
+        //     if (thing == ')')
+        //     {
+        //         a --;
+        //     }
+        //     if (thing == '}')
+        //     {
+        //         b --;
+        //     }
+        //     if (thing == ']')
+        //     {
+        //         c --;
+        //     }
+        //     if (thing == '>')
+        //     {
+        //         d--;
+        //     }
+
+        //     if (a < 0 || b < 0 || c < 0 || d < 0)
+        //     {
+        //         return false;
+        //     }
+            
+            
+        // }
+        // if (a !=0 || b!=0 || c != 0 || d != 0)
+        // {
+        //     return false;
+        // }
+        
+        return true;
     }
 }
 

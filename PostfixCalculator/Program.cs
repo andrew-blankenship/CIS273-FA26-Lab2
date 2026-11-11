@@ -3,6 +3,8 @@
 
 public class Program
 {
+    public static Stack<double> nums = new Stack<double>();
+
     public static void Main(string[] args)
     {
 
@@ -24,7 +26,7 @@ public class Program
     /// <list type="bullet">
     /// <item><description>
     /// Operands (numbers) and operators are separated by whitespace. There may be more than
-    /// one whitespace character between tokens, and spaces, tabs, and newlines all count.
+    /// one whitespace digit.ToString() between tokens, and spaces, tabs, and newlines all count.
     /// </description></item>
     /// <item><description>The supported operators are +, -, *, and /.</description></item>
     /// <item><description>
@@ -66,7 +68,97 @@ public class Program
     /// <returns>The value of the expression, or null if it cannot be evaluated.</returns>
     public static double? Evaluate(string s)
     {
-        return null;
+        if (s.Replace(" ", "") == "")
+        {
+            return null;
+        }
+        s = s.Trim();
+        s = s.Replace("  ", " ");
+        
+        string[] words = s.Split(null);
+
+        
+
+
+        foreach (string thing in words)
+        {
+            if (thing == "+" || thing == "-" || thing == "*" || thing == "/")
+            {
+                if (nums.Count < 2)
+                {
+                    nums.Clear();
+                    return null;
+                }
+                if (nums.Count >= 2)
+                {
+                    double a = nums.Pop();
+                    double b = nums.Pop();
+
+                    if (thing == "+")
+                    {
+                        double digit = b+a;
+                
+
+                        nums.Push(digit);
+                    }
+                    if (thing == "-")
+                    {
+                        double digit = b-a;
+                        
+
+                        nums.Push(digit);
+                    }
+                    if (thing == "*")
+                    {
+                        double digit = b*a;
+                        
+
+                        nums.Push(digit);
+                    }
+                    if (thing == "/")
+                    {
+                        if (a == 0)
+                        {
+                            if (b > 0)
+                            {
+                                return double.PositiveInfinity;
+                                
+                            }
+                            if (b < 0)
+                            {
+                                return double.NegativeInfinity;
+                                
+                            }
+                            if (b == 0)
+                            {
+                                return double.NaN;
+                            }
+                        }
+                        double digit = b/a;
+
+                        nums.Push(digit);
+                    }
+                }
+                
+        
+            }
+            else if (thing == " ")
+            {
+                continue;
+            }
+            else
+            {
+                double num = double.Parse(thing);
+                nums.Push(num);
+            }
+        }
+        if (nums.Count > 1)
+        {
+            nums.Clear();
+            return null;
+            
+        }
+        return nums.Pop();
     }
 }
 
